@@ -1,5 +1,5 @@
+use common::load_input;
 use std::collections::HashMap;
-use std::io::{self, Read};
 
 #[derive(Clone, Debug)]
 enum Value {
@@ -17,17 +17,9 @@ enum Op {
     Shr(Value, Value),
 }
 
-fn main() -> Result<(), io::Error> {
-    let mut input = String::new();
-    io::stdin().read_to_string(&mut input)?;
-
-    let lines: Vec<&str> = input
-        .split('\n')
-        .filter(|l| l.len() > 0)
-        .collect::<Vec<&str>>();
-
+fn main() {
+    let lines: Vec<String> = load_input!("\n");
     let mut map = read_ops(&lines);
-
     let results1 = process_ops(&mut map.clone());
 
     map.insert(
@@ -39,8 +31,6 @@ fn main() -> Result<(), io::Error> {
 
     println!("Wire `a` is equal to {} in part 1.", results1["a"]);
     println!("Wire `a` is equal to {} in part 2.", results2["a"]);
-
-    Ok(())
 }
 
 fn process_ops(map: &mut HashMap<String, Op>) -> HashMap<String, u16> {
@@ -111,7 +101,7 @@ fn binary_op(
     }
 }
 
-fn read_ops(lines: &Vec<&str>) -> HashMap<String, Op> {
+fn read_ops(lines: &Vec<String>) -> HashMap<String, Op> {
     let mut map = HashMap::<String, Op>::new();
 
     for line in lines {

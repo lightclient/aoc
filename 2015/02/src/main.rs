@@ -1,15 +1,11 @@
+use common::load_input;
 use std::cmp::{max, min};
-use std::io::{self, Read};
 
 struct Dimensions(u32, u32, u32);
 
-fn main() -> Result<(), io::Error> {
-    let mut input = String::new();
-    io::stdin().read_to_string(&mut input)?;
-
-    let lines: Vec<&str> = input.split("\n").collect();
+fn main() {
+    let lines: Vec<String> = load_input!("\n");
     let box_sizes: Vec<Dimensions> = lines.into_iter().filter_map(parse_to_dimensions).collect();
-
     let wrapping_paper_needed: u32 = box_sizes.iter().map(&calc_wrapping_paper).sum();
     let ribbon_needed: u32 = box_sizes.iter().map(&calc_ribbon_length).sum();
 
@@ -19,11 +15,9 @@ fn main() -> Result<(), io::Error> {
     );
 
     println!("Total ribbon needed = {} feet", ribbon_needed);
-
-    Ok(())
 }
 
-fn parse_to_dimensions(s: &str) -> Option<Dimensions> {
+fn parse_to_dimensions(s: String) -> Option<Dimensions> {
     let d: Vec<&str> = s.split("x").collect();
 
     match d.len() {

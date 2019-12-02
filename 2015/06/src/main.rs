@@ -1,4 +1,4 @@
-use std::io::{self, Read};
+use common::load_input;
 
 type Grid1 = [[bool; 1000]; 1000];
 type Grid2 = [[u32; 1000]; 1000];
@@ -13,16 +13,11 @@ enum Instruction {
 #[derive(Clone, Debug)]
 struct Section(usize, usize, usize, usize);
 
-fn main() -> Result<(), io::Error> {
-    let mut input = String::new();
-    io::stdin().read_to_string(&mut input)?;
-
-    let lines: Vec<&str> = input.split('\n').filter(|l| l.len() > 0).collect();
+fn main() {
+    let config: Vec<Instruction> = load_input!("\n", self::parse_light_config);
 
     let mut grid1 = [[false; 1000]; 1000];
     let mut grid2 = [[0; 1000]; 1000];
-
-    let config: Vec<Instruction> = lines.into_iter().map(parse_light_config).collect();
 
     let _ = config
         .iter()
@@ -39,8 +34,6 @@ fn main() -> Result<(), io::Error> {
 
     println!("There are {} lights on.", count);
     println!("There total intensity is {}.", sum);
-
-    Ok(())
 }
 
 fn apply_instruction_part_1(instruction: &Instruction, grid: &mut Grid1) {
@@ -75,11 +68,11 @@ fn apply_instruction_part_2(instruction: &Instruction, grid: &mut Grid2) {
     }
 }
 
-fn parse_light_config(config: &str) -> Instruction {
-    let config: Vec<&str> = config.split_whitespace().collect();
+fn parse_light_config(config: String) -> Instruction {
+    let config: Vec<String> = config.split_whitespace().map(|s| s.to_string()).collect();
 
-    match config[0] {
-        "turn" => match config[1] {
+    match config[0].as_ref() {
+        "turn" => match config[1].as_ref() {
             "on" => Instruction::On(parse_section(config[2..].to_vec())),
             "off" => Instruction::Off(parse_section(config[2..].to_vec())),
             _ => unreachable!(),
@@ -89,7 +82,7 @@ fn parse_light_config(config: &str) -> Instruction {
     }
 }
 
-fn parse_section(config: Vec<&str>) -> Section {
+fn parse_section(config: Vec<String>) -> Section {
     let first: Vec<&str> = config[0].split(",").collect();
     let second: Vec<&str> = config[2].split(",").collect();
 

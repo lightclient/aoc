@@ -1,24 +1,16 @@
-use std::io::{self, Read};
+use common::load_input;
 
-fn main() -> Result<(), io::Error> {
-    let mut input = String::new();
-    io::stdin().read_to_string(&mut input)?;
-
-    let lines: Vec<&str> = input
-        .split('\n')
-        .filter(|l| l.len() > 0)
-        .collect::<Vec<&str>>();
+fn main() {
+    let lines: Vec<String> = load_input!("\n");
 
     let diff = lines.iter().map(char_diff).sum::<u32>();
     let new = lines.iter().map(new_repr).sum::<u32>();
 
     println!("{} more chars used for representation", diff);
     println!("{} more chars used in new representation", new);
-
-    Ok(())
 }
 
-fn char_diff(line: &&str) -> u32 {
+fn char_diff(line: &String) -> u32 {
     let repr = line.len() as u32;
     let mut data = 0;
     let mut iter = line.chars();
@@ -44,7 +36,7 @@ fn char_diff(line: &&str) -> u32 {
     repr - data
 }
 
-fn new_repr(line: &&str) -> u32 {
+fn new_repr(line: &String) -> u32 {
     let data = line.len() as u32;
     let mut new = 0;
     let mut iter = line.chars();

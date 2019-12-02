@@ -1,9 +1,8 @@
+use common::load_input;
 use md5;
-use std::io::{self, Read};
 
-fn main() -> Result<(), io::Error> {
-    let mut input = String::new();
-    io::stdin().read_to_string(&mut input)?;
+fn main() {
+    let input = load_input!();
 
     // the mask is for the upper 5 nibbles
     let mask = u128::from_le_bytes([255, 255, 240, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
@@ -22,8 +21,6 @@ fn main() -> Result<(), io::Error> {
         "The hash for input {} for difficulty 6 is {:x} using nonce {}",
         input, six_hash, six_nonce
     );
-
-    Ok(())
 }
 
 fn find_hash(s: &String, mask: u128) -> (u32, u128) {

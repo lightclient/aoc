@@ -1,11 +1,8 @@
+use common::load_input;
 use std::collections::HashMap;
-use std::io::{self, Read};
 
-fn main() -> Result<(), io::Error> {
-    let mut input = String::new();
-    io::stdin().read_to_string(&mut input)?;
-
-    let lines: Vec<&str> = input.split('\n').filter(|l| l.len() > 0).collect();
+fn main() {
+    let lines: Vec<String> = load_input!("\n");
 
     let nice_strings_part_one = lines
         .iter()
@@ -30,11 +27,9 @@ fn main() -> Result<(), io::Error> {
         "There are {} nice strings for part two.",
         nice_strings_part_two
     );
-
-    Ok(())
 }
 
-fn is_nice_part_one(s: &str) -> bool {
+fn is_nice_part_one(s: String) -> bool {
     let mut double = false;
     let mut bad_substring = false;
     let mut last = s.chars().next().unwrap();
@@ -60,7 +55,7 @@ fn is_nice_part_one(s: &str) -> bool {
     vowels >= 3 && double && !bad_substring
 }
 
-fn is_nice_part_two(s: &str) -> bool {
+fn is_nice_part_two(s: String) -> bool {
     let mut repeat = false;
     let mut last_last = s.chars().next().unwrap();
     let mut last = s.chars().skip(1).next().unwrap();

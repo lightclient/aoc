@@ -1,14 +1,7 @@
-use std::io::{self, Read};
+use common::load_input;
 
-fn main() -> Result<(), io::Error> {
-    let mut input = String::new();
-    io::stdin().read_to_string(&mut input)?;
-
-    let mut ops: Vec<usize> = input
-        .split(",")
-        .map(|n| n.replace(&['\n'][..], ""))
-        .map(|n| n.parse::<usize>().unwrap())
-        .collect();
+fn main() {
+    let mut ops: Vec<usize> = load_input!(',', usize);
 
     // specific initialization
     ops[1] = 12;
@@ -19,8 +12,6 @@ fn main() -> Result<(), io::Error> {
 
     println!("mem[0]: {}", initial_mem[0]);
     println!("100 * noun + verb = {}", 100 * noun + verb);
-
-    Ok(())
 }
 
 fn find_inputs(ops: &[usize]) -> (usize, usize) {

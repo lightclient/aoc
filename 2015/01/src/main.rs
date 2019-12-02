@@ -1,21 +1,17 @@
-use std::io::{self, Read};
+use common::load_input;
 
-fn main() -> Result<(), io::Error> {
-    let mut input = String::new();
-    io::stdin().read_to_string(&mut input)?;
-
+fn main() {
+    let input = load_input!();
     let floor = count_unmatched_parenthese(&input);
-    println!("floor = {}", floor);
-
     let basement_index = index_of_invalid_parenthese_close(&input);
+
+    println!("floor = {}", floor);
     println!(
         "basement index = {}",
         basement_index
             .map(|i| (i + 1).to_string())
             .unwrap_or("Did not enter basement".to_string())
     );
-
-    Ok(())
 }
 
 fn count_unmatched_parenthese(s: &String) -> i32 {

@@ -1,20 +1,17 @@
+use common::load_input;
 use std::collections::HashMap;
-use std::io::{self, Read};
 
 #[derive(Clone, Copy, Eq, Hash, PartialEq)]
 struct Position(i32, i32);
 
-fn main() -> Result<(), io::Error> {
-    let mut input = String::new();
-    io::stdin().read_to_string(&mut input)?;
+fn main() {
+    let input = load_input!();
 
     let vists = calc_visits(&input);
     println!("{} houses were visited", vists);
 
     let vists = calc_alternating_visits(&input);
     println!("{} houses were visited between Santa and Robo-Santa", vists);
-
-    Ok(())
 }
 
 fn calc_visits(s: &String) -> u32 {
