@@ -10,8 +10,8 @@ macro_rules! load_input {
 
         input
             .split($separator)
-            .filter(|l| l.len() > 0)
             .map(|l| l.replace(&['\n'][..], ""))
+            .filter(|l| l.len() > 0)
             $(.map($mapper))*
             .collect()
     }};
