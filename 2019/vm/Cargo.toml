@@ -1,0 +1,13 @@
+[package]
+name = "vm"
+version = "0.1.0"
+authors = ["Matt Garnett <matt.garnett@me.com>"]
+edition = "2018"
+
+crate-type = ["lib"]
+
+[dependencies]
+slog = { version = "2.5.2", features = [] }
+slog-stdlog = "4.0.0"
+slog-async = "2.3.0"
+slog-term = "2.4.2"
