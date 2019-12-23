@@ -1,10 +1,4 @@
-use crate::Int;
-
-#[derive(Debug, PartialEq)]
+#[derive(Debug)]
 pub enum Error {
-    UnknownInstruction(Int),
-    MissingOperand(Int),
-    InvalidOperator(Int),
-    InvalidProgram,
-    EndOfProgram,
+    AlreadyHalted,
 }

@@ -1,9 +1,10 @@
 mod error;
-mod instruction;
-mod operand;
-mod operator;
+mod op;
+mod status;
 mod vm;
 
+pub use crate::error::Error;
+pub use crate::status::Status;
 pub use crate::vm::Vm;
 
-type Int = i64;
+pub type Int = i64;

@@ -6,4 +6,4 @@ edition = "2018"
 
 [dependencies]
 common = { path = "../../common" }
-crossbeam = "0.7.3"
+vm = { path = "../vm" }
