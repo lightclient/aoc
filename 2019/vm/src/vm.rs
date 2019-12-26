@@ -148,17 +148,17 @@ impl Vm {
         self.output
     }
 
-    fn get(&self, offset: usize) -> Int {
+    pub fn get(&self, offset: usize) -> Int {
         self.mem[offset]
     }
 
-    fn set(&mut self, offset: Int, value: Int) {
+    pub fn set(&mut self, offset: Int, value: Int) {
         self.mem[offset as usize] = value;
     }
 
     pub fn reset(&mut self) {
         let mut mem = self.code.to_vec();
-        mem.extend(vec![0; 1000]);
+        mem.extend(vec![0; 10000]);
 
         self.pc = 0;
         self.mem = mem;
