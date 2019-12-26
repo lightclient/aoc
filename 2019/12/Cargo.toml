@@ -1,0 +1,9 @@
+[package]
+name = "day12"
+version = "0.1.0"
+authors = ["Matt Garnett <matt.garnett@me.com>"]
+edition = "2018"
+
+[dependencies]
+common = { path = "../../common" }
+num = "0.1.32"
